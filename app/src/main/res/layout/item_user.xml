@@ -5,9 +5,14 @@
         <variable
             name="user"
             type="com.bichi.showallprojectongit.model.User" />
+
+        <variable
+            name="listner"
+            type="com.bichi.showallprojectongit.view.MyInterface" />
     </data>
 
     <LinearLayout
+        android:onClick="@{()->listner.userClicked(user)}"
         android:background="@color/colorAccent"
         android:padding="20dp"
         android:layout_width="match_parent"

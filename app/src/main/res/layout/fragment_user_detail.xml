@@ -1,14 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.UserDetailFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+        <variable
+            name="user"
+            type="com.bichi.showallprojectongit.model.User" />
+    </data>
+
+    <LinearLayout
+        android:background="@color/colorAccent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical"
+        tools:context=".view.UserDetailFragment">
 
-</FrameLayout>
+        <ImageView
+            app:avatar="@{user.owner.avatarUrl}"
+            android:layout_gravity="center"
+            android:layout_width="120dp"
+            android:layout_height="120dp" />
+
+        <TextView
+            android:textColor="@android:color/white"
+            android:text="@{user.name}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:textColor="@android:color/white"
+            android:text="@{user.fullName}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:textColor="@android:color/white"
+            android:text="@{user.description}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:textColor="@android:color/white"
+            android:text="@{user.language}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:textColor="@android:color/white"
+            android:text="@{user.owner.login}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</layout>

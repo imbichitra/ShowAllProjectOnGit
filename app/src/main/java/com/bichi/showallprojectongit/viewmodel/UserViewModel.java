@@ -33,6 +33,8 @@ public class UserViewModel extends ViewModel {
         this.repository = repository;
     }
 
+    public User clickedUser;
+
     public void fetchUserRepo() {
         repository.fetchUserRepo(userName)
                 .subscribeOn(Schedulers.io())

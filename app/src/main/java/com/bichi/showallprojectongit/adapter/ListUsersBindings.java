@@ -1,6 +1,7 @@
 package com.bichi.showallprojectongit.adapter;
 
 import android.util.Log;
+import android.widget.ImageView;
 
 import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -8,15 +9,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bichi.showallprojectongit.model.User;
+import com.bichi.showallprojectongit.view.MyInterface;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
 import static android.content.ContentValues.TAG;
 
 public class ListUsersBindings {
-    @BindingAdapter("dataList")
+    /*@BindingAdapter("dataList")
     public static void loadUsers(RecyclerView recyclerView, List<User> users) {
-        if (users.isEmpty())
+        if (users!=null && users.isEmpty())
             return;
 
         RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
@@ -27,14 +30,12 @@ public class ListUsersBindings {
         ListUsersAdapter adapter = new ListUsersAdapter(recyclerView.getContext(),users);
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(),DividerItemDecoration.VERTICAL));
-    }
-
-    /*@BindingAdapter("load_user_avatar")
-    public static void loadUserAvatar(SimpleDraweeView simpleDraweeView, User user) {
-        RoundingParams roundingParams = RoundingParams.fromCornersRadius(5f);
-        roundingParams.setRoundAsCircle(true);
-
-        simpleDraweeView.getHierarchy().setRoundingParams(roundingParams);
-        simpleDraweeView.setImageURI(user.getAvatarUrl());
     }*/
+
+    @BindingAdapter("avatar")
+    public static void loadUserAvatar(ImageView imageView, String url) {
+        Glide.with(imageView.getContext())
+                .load(url)
+                .into(imageView);
+    }
 }

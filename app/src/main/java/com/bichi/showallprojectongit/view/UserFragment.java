@@ -47,7 +47,7 @@ public class UserFragment extends Fragment implements MyInterface{
 
         binding.setViewModel(userViewModel);
         binding.setMyinteface(this);
-        observeResponse();
+        //observeResponse();
         return binding.getRoot();
     }
 
@@ -57,7 +57,7 @@ public class UserFragment extends Fragment implements MyInterface{
         navController = Navigation.findNavController(view);
     }
 
-    public void observeResponse() {
+   /* public void observeResponse() {
         userViewModel.getResponse().observe(getViewLifecycleOwner(), new Observer<Resource<List<User>>>() {
             @Override
             public void onChanged(Resource<List<User>> listResource) {
@@ -82,14 +82,19 @@ public class UserFragment extends Fragment implements MyInterface{
                 }
             }
         });
-    }
+    }*/
 
     @Override
     public void onSubmitClick() {
         if (userViewModel.userName != null &&!userViewModel.userName.isEmpty()) {
-            userViewModel.fetchUserRepo();
+            navController.navigate(R.id.action_userFragment_to_userLisFragment);
         }else {
             Toast.makeText(getContext(), "Enter username", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void userClicked(User user) {
+
     }
 }
