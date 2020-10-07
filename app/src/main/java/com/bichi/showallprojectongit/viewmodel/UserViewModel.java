@@ -1,11 +1,14 @@
 package com.bichi.showallprojectongit.viewmodel;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.LiveDataReactiveStreams;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.bichi.showallprojectongit.model.Followers;
 import com.bichi.showallprojectongit.model.User;
 import com.bichi.showallprojectongit.network.Resource;
 import com.bichi.showallprojectongit.repository.UserRepository;
@@ -20,11 +23,16 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 public class UserViewModel extends ViewModel {
+    public static final String TAG = UserViewModel.class.getSimpleName();
     public String userName;
     private UserRepository repository;
-    protected final MutableLiveData<Resource<List<User>>> mUsers = new MutableLiveData<>();
+    private final MutableLiveData<Resource<List<User>>> mUsers = new MutableLiveData<>();
+    private final MutableLiveData<Resource<List<Followers>>> followers = new MutableLiveData<>();
 
 
+    public MutableLiveData<Resource<List<Followers>>> getFollowersData() {
+        return followers;
+    }
     public MutableLiveData<Resource<List<User>>> getResponse() {
         return mUsers;
     }
@@ -39,7 +47,7 @@ public class UserViewModel extends ViewModel {
         repository.fetchUserRepo(userName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(s -> mUsers.postValue(Resource.loading((List<User>)null)))
+                .doOnSubscribe(s -> mUsers.postValue(Resource.loading((List<User>) null)))
                 //.doAfterTerminate(() -> loadingStatus.setValue(false))
                 .subscribe(new Observer<List<User>>() {
                     @Override
@@ -55,11 +63,41 @@ public class UserViewModel extends ViewModel {
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
-                        mUsers.postValue(Resource.error(e.getMessage(),null));
+                        mUsers.postValue(Resource.error(e.getMessage(), null));
                     }
 
                     @Override
                     public void onComplete() {
+                    }
+                });
+    }
+
+    public void getFollowers(){
+        Log.d(TAG, "getFollowers: "+userName);
+        repository.getFollowers(userName)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(s->followers.postValue(Resource.loading(null)))
+                .subscribe(new Observer<List<Followers>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<Followers> mfollowers) {
+                        followers.postValue(Resource.success(mfollowers));
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        followers.postValue(Resource.error(e.getMessage(),null));
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
     }

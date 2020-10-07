@@ -47,6 +47,7 @@ public class UserLisFragment extends Fragment implements MyInterface{
                 if (listResource != null){
                     switch (listResource.status){
                         case LOADING:{
+
                             Log.d(TAG, "onChanged: UserLisFragment: LOADING...");
                             break;
                         }
@@ -89,7 +90,7 @@ public class UserLisFragment extends Fragment implements MyInterface{
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
     }
-
+    
     private void initAdapter(List<User> data) {
         binding.listUser.setLayoutManager(new LinearLayoutManager(getContext()));
         ListUsersAdapter adapter = new ListUsersAdapter(this,data);

@@ -1,5 +1,6 @@
 package com.bichi.showallprojectongit.repository;
 
+import com.bichi.showallprojectongit.model.Followers;
 import com.bichi.showallprojectongit.model.User;
 import com.bichi.showallprojectongit.network.UserApi;
 
@@ -16,5 +17,9 @@ public class UserRepository {
 
     public Observable<List<User>> fetchUserRepo(String userName){
         return api.fetchRepoList(userName);
+    }
+
+    public Observable<List<Followers>> getFollowers(String userName){
+        return api.getFollowers(userName);
     }
 }

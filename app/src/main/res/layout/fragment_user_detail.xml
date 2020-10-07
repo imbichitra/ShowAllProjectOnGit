@@ -4,15 +4,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="java.util.List"/>
+        <import type="com.bichi.showallprojectongit.model.Followers"/>
         <variable
             name="user"
             type="com.bichi.showallprojectongit.model.User" />
+        <variable
+            name="followers"
+            type="List&lt;Followers>" />
     </data>
 
     <LinearLayout
         android:background="@color/colorAccent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:context=".view.UserDetailFragment">
 
@@ -52,5 +57,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@android:color/white"
+            android:id="@+id/followers_user"
+            android:text="Users following's You"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <View
+            android:id="@+id/divider"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dataList="@{followers}"
+            android:clipToPadding="false"
+            android:scrollbars="vertical"
+            android:visibility="visible"
+            tools:listitem="@layout/item_user" />
     </LinearLayout>
+
+
 </layout>

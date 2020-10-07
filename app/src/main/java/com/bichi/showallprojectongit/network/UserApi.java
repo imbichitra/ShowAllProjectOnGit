@@ -1,6 +1,7 @@
 package com.bichi.showallprojectongit.network;
 
 import com.bichi.showallprojectongit.model.ApiListResponse;
+import com.bichi.showallprojectongit.model.Followers;
 import com.bichi.showallprojectongit.model.User;
 
 import java.util.List;
@@ -16,4 +17,8 @@ public interface UserApi {
     @GET("{username}/repos")
     @Headers("Content-Type: application/json")
     Observable<List<User>> fetchRepoList(@Path(value = "username") String username);
+
+    @GET("{username}/followers")
+    @Headers("Content-Type: application/json")
+    Observable<List<Followers>> getFollowers(@Path(value = "username") String username);
 }

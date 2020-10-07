@@ -45,7 +45,7 @@ public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.User
         return users==null?0:users.size();
     }
 
-    public class UserHolder extends RecyclerView.ViewHolder {
+    public static class UserHolder extends RecyclerView.ViewHolder {
         public ItemUserBinding itemView;
         public UserHolder(@NonNull ItemUserBinding itemView) {
             super(itemView.getRoot());

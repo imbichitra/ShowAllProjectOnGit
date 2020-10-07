@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bichi.showallprojectongit.model.Followers;
 import com.bichi.showallprojectongit.model.User;
 import com.bichi.showallprojectongit.view.MyInterface;
 import com.bumptech.glide.Glide;
@@ -17,8 +18,8 @@ import java.util.List;
 import static android.content.ContentValues.TAG;
 
 public class ListUsersBindings {
-    /*@BindingAdapter("dataList")
-    public static void loadUsers(RecyclerView recyclerView, List<User> users) {
+    @BindingAdapter("dataList")
+    public static void loadUsers(RecyclerView recyclerView, List<Followers> users) {
         if (users!=null && users.isEmpty())
             return;
 
@@ -27,10 +28,10 @@ public class ListUsersBindings {
             recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
         }
         Log.d(TAG, "loadUsers: ");
-        ListUsersAdapter adapter = new ListUsersAdapter(recyclerView.getContext(),users);
+        FollowersAdapter adapter = new FollowersAdapter(recyclerView.getContext(),users);
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(),DividerItemDecoration.VERTICAL));
-    }*/
+    }
 
     @BindingAdapter("avatar")
     public static void loadUserAvatar(ImageView imageView, String url) {
